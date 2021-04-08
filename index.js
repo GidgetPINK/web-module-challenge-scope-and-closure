@@ -28,11 +28,15 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   Study the code for counter1 and counter2, then answer the questions below.
   
   1. What is the difference between counter1 and counter2?
+  Answer: Counter 1 is using the local scope and counter 2 is using the global scope for the variable.
   
   2. Which of the two uses a closure? How can you tell?
+  Answer: Counter 2 is using a closure because the function has to reach outside of it's scope to access the variable.
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+  Answer: Counter2 would be better if the variable needs to be accessed once the function has terminated. Counter1 is useful when the
+  variable should only be associated with the function it is part of.
 */
 
 // counter1 code
@@ -63,9 +67,12 @@ NOTE: This will be a callback function for the tasks below
 */
 
 function inning(/*Code Here*/){
-    /*Code Here*/
+    return Math.floor(Math.random() * Math.floor(2));
 }
+console.log(inning());
 
+/* Explanation: I used math.floor to round down and multiplied math.floor by 2 to make sure
+the math.random function returns a number between 0 and 2 */
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -81,9 +88,26 @@ Use the finalScore function below to do the following:
 }
 */ 
 
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function finalScore(inningCB, inningsNum){
+  return {
+    Home: inningCB(), 
+    Away: inningCB()
+  }
 }
+function totalScore(inningcb, gamecb) {
+  const gameScore = [];
+  let homeScore = 0;
+  let awayScore = 0;
+
+  for(let i = 0; i < 9; i++){
+  const currentScore = gamecb(inningcb);
+  homeScore = homeScore + currentScore.Home
+  awayScore = awayScore + currentScore.Away
+  gameScore.push(`Inning ${i + 1}: Away: ${currentScore.Away} - Home: ${currentScore.Home}`);
+}
+return gameScore;
+}
+console.log(totalScore(inning, finalScore))
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
@@ -139,7 +163,9 @@ Use the scoreboard function below to do the following:
 function scoreboard(/* CODE HERE */) {
   /* CODE HERE */
 }
+function baseballGame(scoreBB){
 
+}
 
 
 
